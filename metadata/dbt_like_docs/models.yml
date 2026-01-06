@@ -1,0 +1,109 @@
+version: 1
+
+models:
+
+  - name: fact_claims
+    description: >
+      Contains one row per healthcare claim. This is the main fact table
+      used for financial and operational analytics.
+    grain: one row per claim
+    pii: false
+    columns:
+      - name: claim_id
+        description: Unique identifier for each claim
+        pii: false
+
+      - name: member_id
+        description: Identifier for the member who received the service
+        pii: false
+
+      - name: provider_id
+        description: Identifier for the healthcare provider
+        pii: false
+
+      - name: service_date
+        description: Date when the healthcare service was performed
+        pii: false
+
+      - name: paid_amount
+        description: Amount paid for the claim
+        pii: false
+
+      - name: denial_flag
+        description: Indicates whether the claim was denied (1) or approved (0)
+        pii: false
+
+  - name: dim_member
+    description: >
+      Dimension table containing demographic and plan information
+      about members.
+    grain: one row per member
+    pii: true
+    columns:
+      - name: member_id
+        description: Unique identifier for the member
+        pii: false
+
+      - name: age_band
+        description: Age group bucket of the member
+        pii: false
+
+      - name: gender
+        description: Gender of the member
+        pii: false
+
+      - name: plan_type
+        description: Insurance plan type
+        pii: false
+
+      - name: state
+        description: State where the member resides
+        pii: false
+
+  - name: dim_provider
+    description: >
+      Dimension table containing information about healthcare providers.
+    grain: one row per provider
+    pii: false
+    columns:
+      - name: provider_id
+        description: Unique identifier for the provider
+        pii: false
+
+      - name: specialty
+        description: Medical specialty of the provider
+        pii: false
+
+      - name: facility_type
+        description: Type of healthcare facility
+        pii: false
+
+      - name: state
+        description: State where the provider operates
+        pii: false
+
+  - name: dim_date
+    description: >
+      Calendar dimension table used for time-based analytics.
+    grain: one row per calendar date
+    pii: false
+    columns:
+      - name: date_key
+        description: Surrogate key for the calendar date
+        pii: false
+
+      - name: date
+        description: Actual calendar date
+        pii: false
+
+      - name: year
+        description: Calendar year
+        pii: false
+
+      - name: month
+        description: Calendar month
+        pii: false
+
+      - name: week
+        description: ISO week number
+        pii: false
