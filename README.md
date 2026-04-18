@@ -37,7 +37,7 @@ Smart Visualization (Line / Heatmap)
 
 yaml
 
-### 🔐 Safety by Design
+###  Safety by Design
 - LLMs **never generate SQL**
 - SQL is fully deterministic
 - Warehouse access is tightly controlled
